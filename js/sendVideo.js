@@ -14,14 +14,12 @@ async function pushNewVideo(e) {
     const url = embedVideo.value
     const image = perfilImgVideo.value
 
-    try { //tente
+    try {
         //puxando a function 'createVideo()' da 'apiConection';
         await apiConection.createVideo(title, description, url, image)
         window.location.href = '../pages/envio-concluido.html'
-    } catch {
-        if (Error) {
-            alert('deu cagada aí');
-        }
+    } catch (err) {
+        alert(err);
     }
 }
 form.addEventListener('submit', (e) => pushNewVideo(e));

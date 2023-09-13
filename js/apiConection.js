@@ -6,10 +6,10 @@ async function getVideos() {
 
 //função assincrona responsável por enviar um novo elemento para dentro da API
 async function createVideo(title, description, url, image) {
-    const connection = await fetch('http://localhost:3000/videos', {
-        method: 'POST',
+    const connection = await fetch('http://localhost:3000/video', {
+        method: 'POST', //metodo para 'postar' dados, informações no servidor
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json' //indicando o tipo do arquivo a ser enviado
         },
         body: JSON.stringify({
             titulo: title,
@@ -19,6 +19,10 @@ async function createVideo(title, description, url, image) {
 
         })
     });
+
+    if (!connection.ok) { //se 'connection' false =
+        throw new Error('Não foi possível enviar o vídeo.');
+    }
 
     const convertedConnection = await connection.json();
     return convertedConnection;
